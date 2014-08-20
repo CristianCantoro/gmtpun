@@ -1,11 +1,13 @@
 jQuery(document).ready(function() {
-jQuery(".inputform").submit(function() {
+jQuery(".inputform").submit(function( event ) {
+
+        event.preventDefault();
 
         jQuery('#submit').attr('disabled', 'disabled');
 
         jQuery.ajax({
                 type: "POST",
-                url: "/",
+                url: "/gmtpun/",
                 data: $(this).serialize(),
                 success: function(post_response) {
                     jQuery('#submit').removeAttr('disabled');

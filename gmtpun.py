@@ -12,7 +12,7 @@ GmtPun = Bottle()
 
 @GmtPun.get('/')
 def index_get(data=None):
-  return static_file('index.html', root='.')
+  return static_file('index.html', root='public_html')
 
 @GmtPun.post('/')
 def index_post():
@@ -38,19 +38,19 @@ def index_post():
 
 @GmtPun.route('/css/<css_file>')
 def serve_css(css_file):
-  return static_file(css_file, root='./css')
+  return static_file(css_file, root='./public_html/css')
 
 @GmtPun.route('/images/<filepath:path>')
 def serve_images(filepath):
-  return static_file(filepath, root='./images')
+  return static_file(filepath, root='./public_html/images')
 
 @GmtPun.route('/favicon.ico')
 def serve_favicon():
-  return static_file('favicon.ico', root='.')
+  return static_file('favicon.ico', root='./public_html/')
 
 @GmtPun.route('/js/<filepath:path>')
 def serve_js(filepath):
-  return static_file(filepath, root='./js')
+  return static_file(filepath, root='./public_html/js')
 
 if __name__ == '__main__':
     run(GmtPun, host='localhost', port=8000, debug=True,reloader=True)
