@@ -16,11 +16,7 @@ def index_get(data=None):
 
 @GmtPun.post('/')
 def index_post():
-    import time
-    time.sleep(5)
-
     inputarea = request.forms.get('search_result')
-    print inputarea
 
     if inputarea:
         try:
@@ -56,18 +52,5 @@ def serve_favicon():
 def serve_js(filepath):
   return static_file(filepath, root='./js')
 
-# @GmtPun.route('/hello')
-# def hello_again():
-#     if request.get_cookie("visited"):
-#         return "Welcome back! Nice to see you again"
-#     else:
-#         response.set_cookie("visited", "yes")
-#         return "Hello there! Nice to meet you"
-
-# @GmtPun.post('/')
-# def form_submit():
-#     inputarea = request.forms.get('search_result')
-#     return "<p>You pipoo: %s</p>" %inputarea
-
 if __name__ == '__main__':
-    run(GmtPun,host='gmtpun.org', port=8080, debug=True,reloader=True)
+    run(GmtPun, host='localhost', port=8000, debug=True,reloader=True)
