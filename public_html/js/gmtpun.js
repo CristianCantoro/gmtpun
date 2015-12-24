@@ -5,7 +5,7 @@ $(".inputform").submit(function( event ) {
 
         $('#submit').attr('disabled', 'disabled');
 
-        $ajax({
+        $.ajax({
                 type: "POST",
                 url: "/",
                 data: $(this).serialize(),
