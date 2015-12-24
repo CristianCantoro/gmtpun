@@ -1,6 +1,5 @@
 $(function() {
-$(".inputform").submit(function( event ) {
-
+    $(".inputform").submit(function( event ) {
         event.preventDefault();
 
         $('#submit').attr('disabled', 'disabled');
@@ -17,5 +16,4 @@ $(".inputform").submit(function( event ) {
 
         return false;
         });
-
 });
