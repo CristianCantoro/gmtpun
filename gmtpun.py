@@ -15,6 +15,7 @@ def index_get(data=None):
   return static_file('index.html', root='public_html')
 
 @GmtPun.post('/')
+@GmtPun.post('/gmtpun/')
 def index_post():
     inputarea = request.forms.get('search_result')
 
@@ -53,4 +54,4 @@ def serve_js(filepath):
   return static_file(filepath, root='./public_html/js')
 
 if __name__ == '__main__':
-    run(GmtPun, host='localhost', port=8000, debug=True,reloader=True)
+    run(GmtPun, host='localhost', port=8888, debug=True, reloader=True)
