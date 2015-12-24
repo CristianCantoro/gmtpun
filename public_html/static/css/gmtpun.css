@@ -103,6 +103,19 @@ a:active {
 #result {
    max-width: 95%;
    display: block;
+   vertical-align: middle;
+}
+
+#result-boxes {
+  width: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+#result-boxes span {
+  vertical-align: top;
+  display: inline-block;
+  padding-top: 5px;
 }
 
 #result-original-address {
