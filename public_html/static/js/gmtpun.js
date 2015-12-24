@@ -7,7 +7,7 @@ $(".inputform").submit(function( event ) {
 
         $.ajax({
                 type: "POST",
-                url: "/",
+                url: "/gmtpun/",
                 data: $(this).serialize(),
                 success: function(post_response) {
                     $('#submit').removeAttr('disabled');

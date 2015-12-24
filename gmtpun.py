@@ -15,6 +15,7 @@ def index_get():
   return static_file('index.html', root='public_html')
 
 @GmtPun.post('/')
+@GmtPun.post('/gmtpun/')
 def index_post():
     inputarea = request.forms.get('search_result')
 
