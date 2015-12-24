@@ -11,11 +11,10 @@ import os
 GmtPun = Bottle()
 
 @GmtPun.get('/')
-def index_get(data=None):
+def index_get():
   return static_file('index.html', root='public_html')
 
 @GmtPun.post('/')
-@GmtPun.post('/gmtpun/')
 def index_post():
     inputarea = request.forms.get('search_result')
 
@@ -37,21 +36,34 @@ def index_post():
     else:
         return None
 
-@GmtPun.route('/css/<css_file>')
-def serve_css(css_file):
-  return static_file(css_file, root='./public_html/css')
-
-@GmtPun.route('/images/<filepath:path>')
-def serve_images(filepath):
-  return static_file(filepath, root='./public_html/images')
-
-@GmtPun.route('/favicon.ico')
-def serve_favicon():
-  return static_file('favicon.ico', root='./public_html/')
-
-@GmtPun.route('/js/<filepath:path>')
-def serve_js(filepath):
-  return static_file(filepath, root='./public_html/js')
 
 if __name__ == '__main__':
-    run(GmtPun, host='localhost', port=8888, debug=True, reloader=True)
+
+    import argparse
+    parser = argparse.ArgumentParser(description='Test GMTPUN locally.')
+    parser.add_argument('-d', dest='debug', action='store_true',
+                       help='Debug mode.')
+    parser.add_argument('--host', dest='host', default='localhost',
+                       help='Hostname to use (default: localhost).')
+    parser.add_argument('-p', dest='port', default=8888,
+                       help='Port number to use (default: 8888).')
+    parser.add_argument('-r', dest='reloader', action='store_false',
+                       help='Disable reloader mode.')
+
+    args = parser.parse_args()
+    args.port = int(args.port)
+
+    # When testing locally, let Bottle handle static files
+    @GmtPun.route('/static/<resource>/<filepath:path>')
+    def serve_static(resource, filepath):
+      return static_file(filepath,
+                         root='./public_html/static/{}'.format(resource))
+
+    @GmtPun.route('/favicon.ico')
+    def serve_favicon():
+      return static_file('favicon.ico', root='./public_html/')
+
+    run(GmtPun, host=args.host,
+                port=args.port,
+                debug=args.debug,
+                reloader=args.reloader)
